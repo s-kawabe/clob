@@ -1,0 +1,47 @@
+{
+  "name": "frourio-app-server",
+  "version": "0.1.0",
+  "private": true,
+  "scripts": {
+    "dev": "npm run migrate:dev && run-p dev:*",
+    "dev:server": "webpack --watch --mode=development",
+    "dev:frourio": "frourio --watch",
+    "dev:prisma": "prisma generate --watch",
+    "prebuild": "npm run generate",
+    "build": "webpack --mode=production",
+    "generate": "run-p generate:*",
+    "generate:frourio": "frourio",
+    "generate:prisma": "prisma generate",
+    "migrate:dev": "prisma migrate dev",
+    "migrate:dev:createonly":"prisma migrate dev --create-only",
+    "migrate:reset": "prisma migrate reset",
+    "start": "cross-env NODE_ENV=production node index.js"
+  },
+  "dependencies": {
+    "@prisma/client": "^2.21.2",
+    "class-validator": "^0.13.1",
+    "dotenv": "^8.2.0",
+    "fastify": "^3.15.0",
+    "fastify-cors": "^5.2.0",
+    "fastify-helmet": "^5.3.1",
+    "fastify-jwt": "^2.4.0",
+    "fastify-multipart": "^4.0.5",
+    "fastify-static": "^4.0.1"
+  },
+  "devDependencies": {
+    "@types/busboy": "^0.2.3",
+    "@types/jest": "^26.0.22",
+    "cross-env": "^7.0.3",
+    "frourio": "^0.25.1",
+    "nodemon-webpack-plugin": "^4.5.2",
+    "npm-run-all": "^4.1.5",
+    "prisma": "^2.21.2",
+    "ts-loader": "^8.1.0",
+    "ts-node": "^9.1.1",
+    "tsconfig-paths-webpack-plugin": "^3.5.1",
+    "typescript": "~4.2",
+    "webpack": "^5.35.0",
+    "webpack-cli": "^4.6.0",
+    "webpack-node-externals": "^3.0.0"
+  }
+}
