@@ -7,6 +7,7 @@
     "dev:client": "next dev -p 8001",
     "dev:server": "npm run dev --prefix server",
     "dev:aspida": "aspida --watch",
+    "dev:prisma": "cd ./server && npx prisma studio",
     "build": "run-p build:client build:server",
     "prebuild:client": "npm run generate",
     "build:client": "next build && next export",
