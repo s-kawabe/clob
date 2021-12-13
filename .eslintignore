@@ -1,8 +1,10 @@
 node_modules
 .next
 dist
+test
 out
-server/migration
-server/index.js
-server/lambda.js
-server/lambda_migration.js
+server/*
+tsconfig.json
+jest.config.ts
+.eslintrc.js
+

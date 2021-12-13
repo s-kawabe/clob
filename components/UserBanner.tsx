@@ -1,8 +1,9 @@
-import { useState, useCallback } from 'react'
+import type { ChangeEvent } from 'react'
+import { useCallback, useState } from 'react'
+
 import styles from '~/styles/UserBanner.module.css'
 import { apiClient } from '~/utils/apiClient'
 import type { UserInfo } from '$/types'
-import type { ChangeEvent } from 'react'
 
 const UserBanner = () => {
   const [isLoggedIn, setIsLoggedIn] = useState(false)
@@ -54,7 +55,11 @@ const UserBanner = () => {
     <div className={styles.userBanner}>
       {isLoggedIn ? (
         <>
-          <img src={userInfo.icon} className={styles.userIcon} />
+          <img
+            src={userInfo.icon}
+            className={styles.userIcon}
+            alt="user iamge"
+          />
           <span>{userInfo.name}</span>
           <input type="file" accept="image/*" onChange={editIcon} />
           <button onClick={logout}>LOGOUT</button>

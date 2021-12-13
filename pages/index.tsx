@@ -1,19 +1,19 @@
-import Head from 'next/head'
-import { useCallback, useState } from 'react'
 import useAspidaSWR from '@aspida/swr'
+import Head from 'next/head'
+import type { ChangeEvent, FormEvent } from 'react'
+import { useCallback, useState } from 'react'
+
+import UserBanner from '~/components/UserBanner'
 import styles from '~/styles/Home.module.css'
 import { apiClient } from '~/utils/apiClient'
-import UserBanner from '~/components/UserBanner'
 import type { Task } from '$prisma/client'
-import type { FormEvent, ChangeEvent } from 'react'
 
 const Home = () => {
   const { data: tasks, error, revalidate } = useAspidaSWR(apiClient.tasks)
   const [label, setLabel] = useState('')
-  const inputLabel = useCallback(
-    (e: ChangeEvent<HTMLInputElement>) => setLabel(e.target.value),
-    []
-  )
+  const inputLabel = useCallback((e: ChangeEvent<HTMLInputElement>) => {
+    return setLabel(e.target.value)
+  }, [])
 
   const createTask = useCallback(
     async (e: FormEvent) => {
@@ -62,24 +62,30 @@ const Home = () => {
             <input type="submit" value="ADD" />
           </form>
           <ul className={styles.tasks}>
-            {tasks.map((task) => (
-              <li key={task.id}>
-                <label>
+            {tasks.map((task) => {
+              return (
+                <li key={task.id}>
+                  <label>
+                    <input
+                      type="checkbox"
+                      checked={task.done}
+                      onChange={() => {
+                        return toggleDone(task)
+                      }}
+                    />
+                    <span>{task.label}</span>
+                  </label>
                   <input
-                    type="checkbox"
-                    checked={task.done}
-                    onChange={() => toggleDone(task)}
+                    type="button"
+                    value="DELETE"
+                    style={{ float: 'right' }}
+                    onClick={() => {
+                      return deleteTask(task)
+                    }}
                   />
-                  <span>{task.label}</span>
-                </label>
-                <input
-                  type="button"
-                  value="DELETE"
-                  style={{ float: 'right' }}
-                  onClick={() => deleteTask(task)}
-                />
-              </li>
-            ))}
+                </li>
+              )
+            })}
           </ul>
         </div>
       </main>

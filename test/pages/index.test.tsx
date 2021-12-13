@@ -1,12 +1,15 @@
+import aspida from '@aspida/axios'
+import dotenv from 'dotenv'
+import type { FastifyInstance } from 'fastify';
+import Fastify from 'fastify'
+import cors from 'fastify-cors'
 import React from 'react'
 import { cache } from 'swr'
-import dotenv from 'dotenv'
-import Fastify, { FastifyInstance } from 'fastify'
-import cors from 'fastify-cors'
-import aspida from '@aspida/axios'
-import api from '~/server/api/$api'
+
 import Home from '~/pages/index'
-import { render, fireEvent } from '../testUtils'
+import api from '~/server/api/$api'
+
+import { fireEvent,render } from '../testUtils'
 
 dotenv.config({ path: 'server/.env' })
 
@@ -34,8 +37,8 @@ beforeAll(() => {
   return fastify.listen(process.env.API_SERVER_PORT ?? 8080)
 })
 
-afterEach(() => cache.clear())
-afterAll(() => fastify.close())
+afterEach(() => {return cache.clear()})
+afterAll(() => {return fastify.close()})
 
 describe('Home page', () => {
   it('matches snapshot', async () => {

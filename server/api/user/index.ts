@@ -1,5 +1,6 @@
-import type { AuthHeader, UserInfo } from '$/types'
 import type { ReadStream } from 'fs'
+
+import type { AuthHeader, UserInfo } from '$/types'
 
 export type Methods = {
   get: {
