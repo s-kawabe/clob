@@ -60,7 +60,13 @@ module.exports = {
     'react/display-name': 'error', // 無名関数を禁止する
     'react/no-unused-prop-types': 'error', // 未使用propsはエラー
     'react-hooks/rules-of-hooks': 'error', // hooksの基本的なlinter
-    'react-hooks/exhaustive-deps': 'warn', // effectやcallbackのdeps linter
+    'react-hooks/exhaustive-deps': [
+      // effectやcallbackのdeps linter
+      'warn',
+      {
+        additionalHooks: '(useRecoilCallback|useRecoilTransaction_UNSTABLE)'
+      }
+    ],
     'import/newline-after-import': 'error',
     'import/no-default-export': 'off',
     'simple-import-sort/imports': 'error',
