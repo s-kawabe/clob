@@ -1,9 +1,13 @@
 import useAspidaSWR from '@aspida/swr'
+import { HStack } from '@chakra-ui/react'
 import Head from 'next/head'
 import type { ChangeEvent, FormEvent } from 'react'
 import { useCallback, useState } from 'react'
+import { useSetRecoilState } from 'recoil'
 
+import { TaskView } from '~/components/TaskView'
 import UserBanner from '~/components/UserBanner'
+import { todoListState } from '~/recoil/atom'
 import styles from '~/styles/Home.module.css'
 import { apiClient } from '~/utils/apiClient'
 import type { Task } from '$prisma/client'
@@ -14,13 +18,17 @@ const Home = () => {
   const inputLabel = useCallback((e: ChangeEvent<HTMLInputElement>) => {
     return setLabel(e.target.value)
   }, [])
+  const setTodoList = useSetRecoilState<Task[]>(todoListState)
 
   const createTask = useCallback(
     async (e: FormEvent) => {
       e.preventDefault()
       if (!label) return
 
-      await apiClient.tasks.post({ body: { label } })
+      const task = await apiClient.tasks.post({ body: { label } })
+      setTodoList((prev) => {
+        return [...prev, task.body]
+      })
       setLabel('')
       revalidate()
     },
@@ -29,11 +37,24 @@ const Home = () => {
 
   const toggleDone = useCallback(async (task: Task) => {
     await apiClient.tasks._taskId(task.id).patch({ body: { done: !task.done } })
+    setTodoList((prev) => {
+      return prev.filter((stateTask) => {
+        return stateTask.id !== task.id
+      })
+    })
+    setTodoList((prev) => {
+      return [...prev, { id: task.id, label: task.label, done: !task.done }]
+    })
     revalidate()
   }, [])
 
   const deleteTask = useCallback(async (task: Task) => {
     await apiClient.tasks._taskId(task.id).delete()
+    setTodoList((prev) => {
+      return prev.filter((stateTask) => {
+        return stateTask.id !== task.id
+      })
+    })
     revalidate()
   }, [])
 
@@ -47,48 +68,51 @@ const Home = () => {
         <link rel="icon" href="/favicon.png" />
       </Head>
 
-      <main className={styles.main}>
-        <UserBanner />
+      <HStack spacing={20}>
+        <main className={styles.main}>
+          <UserBanner />
 
-        <h1 className={styles.title}>
-          Welcome to <a href="https://nextjs.org">Next.js!</a>
-        </h1>
+          <h1 className={styles.title}>
+            Welcome to <a href="https://nextjs.org">Next.js!</a>
+          </h1>
 
-        <p className={styles.description}>frourio-todo-app</p>
+          <p className={styles.description}>frourio-todo-app</p>
 
-        <div>
-          <form style={{ textAlign: 'center' }} onSubmit={createTask}>
-            <input value={label} type="text" onChange={inputLabel} />
-            <input type="submit" value="ADD" />
-          </form>
-          <ul className={styles.tasks}>
-            {tasks.map((task) => {
-              return (
-                <li key={task.id}>
-                  <label>
+          <div>
+            <form style={{ textAlign: 'center' }} onSubmit={createTask}>
+              <input value={label} type="text" onChange={inputLabel} />
+              <input type="submit" value="ADD" />
+            </form>
+            <ul className={styles.tasks}>
+              {tasks.map((task) => {
+                return (
+                  <li key={task.id}>
+                    <label>
+                      <input
+                        type="checkbox"
+                        checked={task.done}
+                        onChange={() => {
+                          return toggleDone(task)
+                        }}
+                      />
+                      <span>{task.label}</span>
+                    </label>
                     <input
-                      type="checkbox"
-                      checked={task.done}
-                      onChange={() => {
-                        return toggleDone(task)
+                      type="button"
+                      value="DELETE"
+                      style={{ float: 'right' }}
+                      onClick={() => {
+                        return deleteTask(task)
                       }}
                     />
-                    <span>{task.label}</span>
-                  </label>
-                  <input
-                    type="button"
-                    value="DELETE"
-                    style={{ float: 'right' }}
-                    onClick={() => {
-                      return deleteTask(task)
-                    }}
-                  />
-                </li>
-              )
-            })}
-          </ul>
-        </div>
-      </main>
+                  </li>
+                )
+              })}
+            </ul>
+          </div>
+        </main>
+        <TaskView />
+      </HStack>
 
       <footer className={styles.footer}>
         <a
