@@ -6,5 +6,6 @@ out
 server/*
 tsconfig.json
 jest.config.ts
+aspida.config.js
 .eslintrc.js
 
