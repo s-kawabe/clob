@@ -1,9 +1,9 @@
-import { atom } from 'recoil'
+// import { atom } from 'recoil'
 
-import { AtomKeys } from '~/recoil/key'
-import type { Task } from '$prisma/client'
+// import { AtomKeys } from '~/recoil/key'
+// import type { Task } from '$prisma/client'
 
-export const todoListState = atom<Task[]>({
-  key: AtomKeys.TODO_LIST_ATOM,
-  default: []
-})
+// export const todoListState = atom<Task[]>({
+//   key: AtomKeys.TODO_LIST_ATOM,
+//   default: []
+// })

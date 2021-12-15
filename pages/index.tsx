@@ -3,11 +3,10 @@ import { HStack } from '@chakra-ui/react'
 import Head from 'next/head'
 import type { ChangeEvent, FormEvent } from 'react'
 import { useCallback, useState } from 'react'
-import { useSetRecoilState } from 'recoil'
 
-import { TaskView } from '~/components/TaskView'
-import UserBanner from '~/components/UserBanner'
-import { todoListState } from '~/recoil/atom'
+// import { useSetRecoilState } from 'recoil'
+// import { TaskView } from '~/components/TaskView'
+// import { todoListState } from '~/recoil/atom'
 import styles from '~/styles/Home.module.css'
 import { apiClient } from '~/utils/apiClient'
 import type { Task } from '$prisma/client'
@@ -18,17 +17,17 @@ const Home = () => {
   const inputLabel = useCallback((e: ChangeEvent<HTMLInputElement>) => {
     return setLabel(e.target.value)
   }, [])
-  const setTodoList = useSetRecoilState<Task[]>(todoListState)
+  // const setTodoList = useSetRecoilState<Task[]>(todoListState)
 
   const createTask = useCallback(
     async (e: FormEvent) => {
       e.preventDefault()
       if (!label) return
 
-      const task = await apiClient.tasks.post({ body: { label } })
-      setTodoList((prev) => {
-        return [...prev, task.body]
-      })
+      // const task = await apiClient.tasks.post({ body: { label } })
+      // setTodoList((prev) => {
+      //   return [...prev, task.body]
+      // })
       setLabel('')
       revalidate()
     },
@@ -37,24 +36,24 @@ const Home = () => {
 
   const toggleDone = useCallback(async (task: Task) => {
     await apiClient.tasks._taskId(task.id).patch({ body: { done: !task.done } })
-    setTodoList((prev) => {
-      return prev.filter((stateTask) => {
-        return stateTask.id !== task.id
-      })
-    })
-    setTodoList((prev) => {
-      return [...prev, { id: task.id, label: task.label, done: !task.done }]
-    })
+    // setTodoList((prev) => {
+    //   return prev.filter((stateTask) => {
+    //     return stateTask.id !== task.id
+    //   })
+    // })
+    // setTodoList((prev) => {
+    //   return [...prev, { id: task.id, label: task.label, done: !task.done }]
+    // })
     revalidate()
   }, [])
 
   const deleteTask = useCallback(async (task: Task) => {
     await apiClient.tasks._taskId(task.id).delete()
-    setTodoList((prev) => {
-      return prev.filter((stateTask) => {
-        return stateTask.id !== task.id
-      })
-    })
+    // setTodoList((prev) => {
+    //   return prev.filter((stateTask) => {
+    //     return stateTask.id !== task.id
+    //   })
+    // })
     revalidate()
   }, [])
 
@@ -70,8 +69,6 @@ const Home = () => {
 
       <HStack spacing={20}>
         <main className={styles.main}>
-          <UserBanner />
-
           <h1 className={styles.title}>
             Welcome to <a href="https://nextjs.org">Next.js!</a>
           </h1>
@@ -84,7 +81,7 @@ const Home = () => {
               <input type="submit" value="ADD" />
             </form>
             <ul className={styles.tasks}>
-              {tasks.map((task) => {
+              {tasks.map((task: Task) => {
                 return (
                   <li key={task.id}>
                     <label>
@@ -111,7 +108,6 @@ const Home = () => {
             </ul>
           </div>
         </main>
-        <TaskView />
       </HStack>
 
       <footer className={styles.footer}>
