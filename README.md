@@ -44,54 +44,6 @@
 
 ## db
 
-```
-# users
-- id: int(PK)
-- name: string
-
-# topics
-- id: int(PK)
-- user_id: id(FK)
-- title: string
-- content: string
-- answerLimitChar: int
-- answerLimitHour: Date
-- isClose: boolean
-
-# answers
-- id: int(PK)
-- topic_id: int(FK)
-- user_id: int(FK)
-- answer: string
-
-# likes
-- id: int(PK)
-- answer_id: int(FK)
-- user_id: int(FK)
-```
-
-## api
-
-```
-# userAPI
-- get
-
-# topicAPI
-- get
-- list
-- post
-
-# answerAPI
-- list
-- post
-
-# likeAPI
-- get
-- post
-```
-
-## Entity Diagram
-
 ```uml
 @startuml
 entity "users" {
