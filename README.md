@@ -46,27 +46,28 @@
 
 ```
 # users
-- id: string(PK)
+- id: int(PK)
 - name: string
 
 # topics
-- id: string(PK)
+- id: int(PK)
+- user_id: id(FK)
 - title: string
 - content: string
 - answerLimitChar: int
 - answerLimitHour: Date
 - isClose: boolean
 
-# comments
-- id: string(PK)
-- topic_id: string(FK)
-- user_id: string(FK)
-- comment: string
+# answers
+- id: int(PK)
+- topic_id: int(FK)
+- user_id: int(FK)
+- answer: string
 
 # likes
-- id: string(PK)
-- comment_id: string(FK)
-- user_id: string(FK)
+- id: int(PK)
+- answer_id: int(FK)
+- user_id: int(FK)
 ```
 
 ## api
@@ -80,11 +81,69 @@
 - list
 - post
 
-# commentAPI
+# answerAPI
 - list
 - post
 
 # likeAPI
 - get
 - post
+```
+
+## Entity Diagram
+
+```uml
+@startuml
+entity "users" {
+  + id Int [PK]
+  --
+  name String
+  ==
+  Get()
+  Post()
+}
+
+entity "topics" {
+  + id Int [PK]
+  --
+  # user_id Id [FK]
+  title String
+  content String
+  limit_answer_char Int
+  answer_closed_at Date
+  close Boolean
+  ==
+  Get()
+  List()
+  Post()
+}
+
+entity "answers" {
+  + id Int [PK]
+  --
+  # topic_id Int [FK]
+  # user_id Int [FK]
+  answer String
+  ==
+  List()
+  Post()
+}
+
+entity "likes" {
+  + id Int [PK]
+  --
+  # answer_id Int [FK]
+  # user_id Int [FK]
+  ==
+  List()
+  Post()
+}
+
+users ||--o{ topics
+users ||--o{ answers
+topics ||--o{ answers
+users ||--o{ likes
+answers ||-r-o{ likes
+
+@enduml
 ```
