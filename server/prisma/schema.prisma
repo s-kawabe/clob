@@ -7,8 +7,32 @@ generator client {
   provider = "prisma-client-js"
 }
 
-model Task {
-  id    Int     @id @default(autoincrement())
-  label String
-  done  Boolean @default(false)
+model User {
+  id       Int     @id @default(autoincrement())
+  email    String  @unique
+  name     String  @db.VarChar(128)
+  imageURL String?
+}
+
+model Topics {
+  id              Int      @id @default(autoincrement())
+  userId          Int
+  title           String
+  content         String   @db.Text
+  limitAnswerChar Int
+  answerClosedAt  DateTime
+  close           Boolean
+}
+
+model Answers {
+  id      Int    @id @default(autoincrement())
+  topicId Int
+  userId  Int
+  answer  String
+}
+
+model Likes {
+  id       Int @id @default(autoincrement())
+  answerId Int
+  userId   Int
 }

@@ -50,6 +50,8 @@ entity "users" {
   + id Int [PK]
   --
   name String
+  email String
+  image_url? String
   ==
   Get()
   Post()
