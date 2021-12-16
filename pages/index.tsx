@@ -10,7 +10,6 @@ import { useCallback, useState } from 'react'
 // import { todoListState } from '~/recoil/atom'
 import styles from '~/styles/Home.module.css'
 import { apiClient } from '~/utils/apiClient'
-import type { Task } from '$prisma/client'
 
 const TopPage: NextPage = () => {
   const { data: tasks, error, revalidate } = useAspidaSWR(apiClient.tasks)

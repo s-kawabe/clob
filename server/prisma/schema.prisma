@@ -14,33 +14,45 @@ model User {
   imageURL   String?
   created_at DateTime @default(now()) @db.Timestamp(0)
   updated_at DateTime @default(now()) @updatedAt @db.Timestamp(0)
+  topic      Topic[]
+  answer     Answer[]
+  like       Like[]
 }
 
-model Topics {
+model Topic {
   id              Int      @id @default(autoincrement())
   userId          Int
-  title           String
+  title           String   @db.VarChar(128)
   content         String   @db.Text
   limitAnswerChar Int
   answerClosedAt  DateTime
   close           Boolean
   created_at      DateTime @default(now()) @db.Timestamp(0)
   updated_at      DateTime @default(now()) @updatedAt @db.Timestamp(0)
+
+  answer Answer[]
+  user   User     @relation(fields: [userId], references: [id])
 }
 
-model Answers {
+model Answer {
   id         Int      @id @default(autoincrement())
   topicId    Int
   userId     Int
-  answer     String
+  answer     String   @db.VarChar(64)
   created_at DateTime @default(now()) @db.Timestamp(0)
   updated_at DateTime @default(now()) @updatedAt @db.Timestamp(0)
+
+  Like  Like[]
+  topic Topic  @relation(fields: [topicId], references: [id])
+  user  User   @relation(fields: [userId], references: [id])
 }
 
-model Likes {
-  id         Int      @id @default(autoincrement())
+model Like {
   answerId   Int
   userId     Int
   created_at DateTime @default(now()) @db.Timestamp(0)
-  updated_at DateTime @default(now()) @updatedAt @db.Timestamp(0)
+
+  answer Answer @relation(fields: [answerId], references: [id])
+  user   User   @relation(fields: [userId], references: [id])
+  @@id([answerId, userId])
 }
