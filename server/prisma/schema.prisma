@@ -8,10 +8,12 @@ generator client {
 }
 
 model User {
-  id       Int     @id @default(autoincrement())
-  email    String  @unique
-  name     String  @db.VarChar(128)
-  imageURL String?
+  id         Int      @id @default(autoincrement())
+  email      String   @unique
+  name       String   @db.VarChar(128)
+  imageURL   String?
+  created_at DateTime @default(now()) @db.Timestamp(0)
+  updated_at DateTime @default(now()) @updatedAt @db.Timestamp(0)
 }
 
 model Topics {
@@ -22,17 +24,23 @@ model Topics {
   limitAnswerChar Int
   answerClosedAt  DateTime
   close           Boolean
+  created_at      DateTime @default(now()) @db.Timestamp(0)
+  updated_at      DateTime @default(now()) @updatedAt @db.Timestamp(0)
 }
 
 model Answers {
-  id      Int    @id @default(autoincrement())
-  topicId Int
-  userId  Int
-  answer  String
+  id         Int      @id @default(autoincrement())
+  topicId    Int
+  userId     Int
+  answer     String
+  created_at DateTime @default(now()) @db.Timestamp(0)
+  updated_at DateTime @default(now()) @updatedAt @db.Timestamp(0)
 }
 
 model Likes {
-  id       Int @id @default(autoincrement())
-  answerId Int
-  userId   Int
+  id         Int      @id @default(autoincrement())
+  answerId   Int
+  userId     Int
+  created_at DateTime @default(now()) @db.Timestamp(0)
+  updated_at DateTime @default(now()) @updatedAt @db.Timestamp(0)
 }

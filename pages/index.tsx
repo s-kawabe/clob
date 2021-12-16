@@ -1,5 +1,6 @@
 import useAspidaSWR from '@aspida/swr'
 import { HStack } from '@chakra-ui/react'
+import type { NextPage } from 'next'
 import Head from 'next/head'
 import type { ChangeEvent, FormEvent } from 'react'
 import { useCallback, useState } from 'react'
@@ -11,7 +12,7 @@ import styles from '~/styles/Home.module.css'
 import { apiClient } from '~/utils/apiClient'
 import type { Task } from '$prisma/client'
 
-const Home = () => {
+const TopPage: NextPage = () => {
   const { data: tasks, error, revalidate } = useAspidaSWR(apiClient.tasks)
   const [label, setLabel] = useState('')
   const inputLabel = useCallback((e: ChangeEvent<HTMLInputElement>) => {
@@ -124,4 +125,4 @@ const Home = () => {
   )
 }
 
-export default Home
+export default TopPage

@@ -1,10 +1,10 @@
-// import type { LoginBody } from '$/validators'
+import type { LoginBody } from '$/validators'
 
-// export type Methods = {
-//   post: {
-//     reqBody: LoginBody
-//     resBody: {
-//       token: string
-//     }
-//   }
-// }
+export type Methods = {
+  post: {
+    reqBody: LoginBody
+    resBody: {
+      token: string
+    }
+  }
+}

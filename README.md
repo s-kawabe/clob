@@ -40,6 +40,15 @@
 - 検索中の文字列
   - text
 
+## path
+
+- `/`
+  - UpdatedAt と公開中のものを元に募集中の大喜利を一覧表示
+- `/users/[userId]`
+  - user の個人ページ
+- `/topics/[topicId]`
+  - 大喜利の詳細ページ、コメントやお題について表示
+
 # Backend
 
 ## db
