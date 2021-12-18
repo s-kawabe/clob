@@ -3,7 +3,19 @@ import type { VFC } from 'react'
 import { AiOutlineGoogle } from 'react-icons/ai'
 
 const LoginButton: VFC = () => {
-  return <Button leftIcon={<AiOutlineGoogle />}>ログイン</Button>
+  const handleLogin = async () => {
+    console.log('login')
+  }
+
+  return (
+    <Button
+      color={'white'}
+      leftIcon={<AiOutlineGoogle />}
+      onClick={handleLogin}
+    >
+      ログイン
+    </Button>
+  )
 }
 
 export { LoginButton }

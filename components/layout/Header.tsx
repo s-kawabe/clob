@@ -10,7 +10,7 @@ const Header = () => {
       borderRadius={'full'}
       bgColor={'white'}
       border={'2px'}
-      borderColor={'brown.700'}
+      borderColor={'brown.500'}
       boxShadow={'md'}
     >
       <ProductLogo />
