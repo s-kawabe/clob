@@ -1,5 +1,12 @@
+import { HeadInfo } from '@/components/layout'
+
 const UserPageComponent = () => {
-  return <div>this is user page</div>
+  return (
+    <>
+      <HeadInfo title={'clob | ユーザページ'} />
+      <div>this is user page</div>
+    </>
+  )
 }
 
 export { UserPageComponent }
