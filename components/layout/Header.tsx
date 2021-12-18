@@ -1,3 +1,7 @@
-export const Header = () => {
-  return <div></div>
+import { Box } from '@chakra-ui/react'
+
+const Header = () => {
+  return <Box></Box>
 }
+
+export { Header }

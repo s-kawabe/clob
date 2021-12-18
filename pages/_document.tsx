@@ -21,6 +21,10 @@ const MyDocument = () => {
         {/* <meta name="twitter:card" content="summary_large_image" /> */}
         <meta name="format-detection" content="telephone=no" />
         {/* <link rel="apple-touch-icon" href="/apple-touch-icon.png" /> */}
+        <link
+          href="https://fonts.googleapis.com/css2?family=Kosugi+Maru&family=Noto+Sans+JP:wght@400;700&display=swap"
+          rel="stylesheet"
+        ></link>
       </Head>
       <body>
         <Main />

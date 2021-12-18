@@ -1,16 +1,15 @@
-import '../styles/globals.css'
-
-import { ChakraProvider } from '@chakra-ui/react'
 import type { AppProps } from 'next/app'
 import { RecoilRoot } from 'recoil'
 
+import { DesignProvider } from '@/components/layout'
+
 const MyApp = ({ Component, pageProps }: AppProps) => {
   return (
-    <ChakraProvider>
+    <DesignProvider>
       <RecoilRoot>
         <Component {...pageProps} />
       </RecoilRoot>
-    </ChakraProvider>
+    </DesignProvider>
   )
 }
 
