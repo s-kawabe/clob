@@ -18,10 +18,7 @@ export const init = (serverFactory?: FastifyServerFactory) => {
   const app = Fastify({ serverFactory })
   app.register(helmet)
   app.register(cors)
-  app.register(fastifyStatic, {
-    root: path.join(__dirname, 'static'),
-    prefix: '/static/'
-  })
+
   if (API_UPLOAD_DIR) {
     app.after(() => {
       app.register(fastifyStatic, {
@@ -31,6 +28,7 @@ export const init = (serverFactory?: FastifyServerFactory) => {
       })
     })
   }
+
   app.register(fastifyJwt, { secret: API_JWT_SECRET })
   app.register(fastifyAuth0Verify, {
     domain: AUTH0_DOMAIN,
