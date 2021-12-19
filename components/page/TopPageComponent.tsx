@@ -1,6 +1,7 @@
 import { Box, Heading, Text } from '@chakra-ui/react'
 
 import { HeadInfo } from '@/components/layout'
+import { Loading } from '@/components/shared'
 
 const TopPageComponent = () => {
   return (
@@ -12,6 +13,7 @@ const TopPageComponent = () => {
           これはテキストテキストテキストテキストテキストテキスト
         </Text>
         <Text>これはテキストテキストテキストテキストテキストテキスト</Text>
+        <Loading />
       </Box>
     </>
   )
