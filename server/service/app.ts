@@ -10,6 +10,7 @@ import {
   API_BASE_PATH,
   API_UPLOAD_DIR,
   API_ORIGIN,
+  AUTH0_AUDIENCE,
   AUTH0_DOMAIN
 } from '$/service/envValues'
 import server from '$/$server'
@@ -32,7 +33,7 @@ export const init = (serverFactory?: FastifyServerFactory) => {
   app.register(fastifyJwt, { secret: API_JWT_SECRET })
   app.register(fastifyAuth0Verify, {
     domain: AUTH0_DOMAIN,
-    audience: API_ORIGIN + '/'
+    audience: AUTH0_AUDIENCE
   })
   server(app, { basePath: API_BASE_PATH })
   return app

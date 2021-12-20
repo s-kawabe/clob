@@ -10,8 +10,10 @@ const API_BASE_PATH = process.env.API_BASE_PATH ?? ''
 const API_ORIGIN = process.env.API_ORIGIN ?? ''
 const API_UPLOAD_DIR = process.env.API_UPLOAD_DIR ?? ''
 const AUTH0_DOMAIN = process.env.AUTH0_DOMAIN ?? ''
+const AUTH0_AUDIENCE = process.env.AUTH0_AUDIENCE ?? ''
 
 export {
+  AUTH0_AUDIENCE,
   AUTH0_DOMAIN,
   API_JWT_SECRET,
   API_USER_ID,
