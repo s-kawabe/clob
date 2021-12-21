@@ -8,14 +8,7 @@ type Props = {
 
 const UserAvatar: VFC<Props> = (props) => {
   return (
-    <Avatar
-      name={props.name}
-      src={props.src}
-      size={'md'}
-      cursor={'pointer'}
-      transition={'0.2s'}
-      _hover={{ opacity: 0.9 }}
-    />
+    <Avatar name={props.name} src={props.src} size={'md'} cursor={'pointer'} />
   )
 }
 

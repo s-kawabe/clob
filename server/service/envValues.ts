@@ -11,8 +11,10 @@ const API_ORIGIN = process.env.API_ORIGIN ?? ''
 const API_UPLOAD_DIR = process.env.API_UPLOAD_DIR ?? ''
 const AUTH0_DOMAIN = process.env.AUTH0_DOMAIN ?? ''
 const AUTH0_AUDIENCE = process.env.AUTH0_AUDIENCE ?? ''
+const AUTH0_CLIENT_SECRET = process.env.AUTH0_CLIENT_SECRET ?? ''
 
 export {
+  AUTH0_CLIENT_SECRET,
   AUTH0_AUDIENCE,
   AUTH0_DOMAIN,
   API_JWT_SECRET,

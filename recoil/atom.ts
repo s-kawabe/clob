@@ -1,13 +1,13 @@
-// import { AtomKeys } from '~/recoil/key'
 import { atom } from 'recoil'
 
-import type { User } from '$prisma/client'
+import type { PrismaUser } from '$/types'
+import { defaultPrismaUserValues } from '$/types'
 
 import { AtomKeys } from './key'
 
-export const userAtom = atom<User>({
+export const userAtom = atom<PrismaUser>({
   key: AtomKeys.USER_ATOM,
-  default: {} as User
+  default: defaultPrismaUserValues
 })
 
 export const isLoginAtom = atom<boolean>({
