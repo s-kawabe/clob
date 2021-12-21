@@ -1,9 +1,16 @@
-// import { atom } from 'recoil'
-
 // import { AtomKeys } from '~/recoil/key'
-// import type { Task } from '$prisma/client'
+import { atom } from 'recoil'
 
-// export const todoListState = atom<Task[]>({
-//   key: AtomKeys.TODO_LIST_ATOM,
-//   default: []
-// })
+import type { User } from '$prisma/client'
+
+import { AtomKeys } from './key'
+
+export const userAtom = atom<User>({
+  key: AtomKeys.USER_ATOM,
+  default: {} as User
+})
+
+export const isLoginAtom = atom<boolean>({
+  key: AtomKeys.IS_LOGIN_USER,
+  default: false
+})

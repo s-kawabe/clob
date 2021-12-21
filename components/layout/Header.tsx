@@ -19,8 +19,6 @@ import {
 } from '@/utils/envValues'
 
 const Header = () => {
-  // const [isLogin, setIsLogin] = useState(false)
-  // const [userInfo, setUserInfo] = useState<User | null>(null)
   const handleLogin = async () => {
     await auth0.loginWithRedirect({
       redirect_uri: NEXT_PUBLIC_BASE_URL
